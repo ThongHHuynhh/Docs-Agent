@@ -1,0 +1,45 @@
+name: Generate Customer Docs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "docs/**"
+      - "customers/**"
+      - "agent/**"
+      - "requirements.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install LibreOffice
+        run: sudo apt-get update && sudo apt-get install -y libreoffice
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+
+      - name: Generate docs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python agent/main.py
+
+      - name: Commit generated files
+        run: |
+          git config user.name "doc-agent"
+          git config user.email "doc-agent@users.noreply.github.com"
+          git add outputs/
+          git commit -m "Generate customer documentation" || echo "No changes to commit"
+          git push

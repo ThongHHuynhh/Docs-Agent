@@ -1,0 +1,10 @@
+customer_name: "BDF"
+industry: "Bakery automation"
+tone: "professional and simple"
+output_name: "bdf_bakery_product_doc"
+
+custom_prompt: >
+  Customize the documentation for this customer.
+  Focus on automation, production monitoring,
+  and operator-friendly explanations.
+  Limit the content to 4 pages. Use clear headings and bullet points.
