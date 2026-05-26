@@ -10,3 +10,4 @@ custom_prompt: >
   Use clear headings and bullet points.
   Avoid technical jargon and keep it accessible for non-technical users.
   Leave some space for images or diagrams that can be added later to illustrate key concepts.
+  Use the image in the docs/images/image.pnd as a header image for the file, center align and appropriate size.
