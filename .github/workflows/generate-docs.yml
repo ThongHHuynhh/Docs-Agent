@@ -1,13 +1,10 @@
 name: Generate Customer Docs
 
 on:
-  workflow_dispatch:
   push:
-    paths:
-      - "docs/**"
-      - "customers/**"
-      - "agent/**"
-      - "requirements.txt"
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -26,10 +23,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install LibreOffice
-        run: sudo apt-get update && sudo apt-get install -y libreoffice
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice
 
-      # - name: Install Python packages
-      #   run: pip install -r requirements.txt
       - name: Cache pip
         uses: actions/cache@v4
         with:
@@ -46,12 +43,17 @@ jobs:
       - name: Generate docs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python agent/main.py
+        run: |
+          python agent/main.py
 
       - name: Commit generated files
         run: |
           git config user.name "doc-agent"
           git config user.email "doc-agent@users.noreply.github.com"
+
           git add outputs/
-          git commit -m "Generate customer documentation" || echo "No changes to commit"
+
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+
+          git commit -m "Generate customer documentation [skip ci]"
           git push
