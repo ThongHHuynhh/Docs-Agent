@@ -10,8 +10,8 @@ import re
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCS_DIR = ROOT / "docs"
-TEMPLATES_DIR = ROOT / "templates"
+DOCS_DIR = ROOT.parent / "V3" /"Docs"
+TEMPLATES_DIR = ROOT  / "templates"
 CUSTOMERS_DIR = ROOT / "customers"
 OUTPUTS_DIR = ROOT / "outputs"
 
@@ -66,8 +66,8 @@ def read_universal_docs():
     content = []
     image_map = {}
 
-    #supported_ext = [".md", ".txt", ".docx"]
-    supported_ext = [".docx"]
+    supported_ext = [".md", ".txt", ".docx"]
+    #supported_ext = [".docx"]
 
     for file_path in DOCS_DIR.rglob("*"):
         if file_path.is_file() and file_path.suffix.lower() in supported_ext:
