@@ -5,8 +5,6 @@ output_name: "bdf_bakery_product_doc"
 
 custom_prompt: >
   Customize the documentation for this customer.
-  Focus on automation, production monitoring,
-  and operator-friendly explanations.
   Use clear headings and bullet points.
   Avoid technical jargon and keep it accessible for non-technical users.
   Leave some space for images or diagrams that can be added later to illustrate key concepts.
