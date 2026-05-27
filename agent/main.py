@@ -101,7 +101,8 @@ def generate_custom_doc(universal_docs, customer):
     prompt = f"""
 You are a technical documentation agent.
 
-You must customize product documentation using ONLY the universal documentation below.
+You must customize product documentation using ONLY the universal documentation below. 
+The given documentation is customized for each customer, based on that make a general version of the documentation.
 
 Universal documentation:
 {universal_docs}
@@ -111,13 +112,12 @@ Customer configuration:
 
 
 Task:
-Create a customized customer-use product document.
+Generalize the given documents and create a customized customer-use product document.
 
 Rules:
 - Use clear headings.
 - Be professional.
 - Do not invent unsupported features.
-- Adapt language to the customer's industry.
 - Mention the customer name where appropriate.
 - Be simple and straightforward, with customer perspective.
 - Preserve image placeholders of the form [[IMAGE:<source-file>:<index>:<name>]].
