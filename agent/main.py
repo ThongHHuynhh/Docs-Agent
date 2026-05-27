@@ -10,7 +10,7 @@ import re
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCS_DIR = ROOT.parent / "V3" /"Docs"
+DOCS_DIR = ROOT /"Docs"
 TEMPLATES_DIR = ROOT  / "templates"
 CUSTOMERS_DIR = ROOT / "customers"
 OUTPUTS_DIR = ROOT / "outputs"
